@@ -220,3 +220,27 @@ let arrayItems = [6, 5, 1, 2, 8, 9, 3, 1, 1, 0, 4];
 // Shuffle an array
 arrayItems = arrayItems.sort((_, __) => Math.random() - 0.5);
 console.log(arrayItems);
+// Custom Number Formatter
+const numberFormatter = (num, digitsAfterDecimal, isCurrency = false) => {
+  const formatKeys = [
+    { value: 1, symbol: "" },
+    { value: 1e3, symbol: "K" },
+    { value: 1e6, symbol: "MM" },
+    { value: 1e9, symbol: "B" }
+  ];
+  const dollarRegex = /\.0+$|(\.[0-9]*[1-9])0+$/;
+  let i;
+  for (i = formatKeys.length - 1; i > 0; i--) {
+    if (num >= formatKeys[i].value) {
+      break;
+    }
+  }
+  return isCurrency
+    ? (num / formatKeys[i].value)
+        .toFixed(digitsAfterDecimal)
+        .replace(dollarRegex, "$1") + formatKeys[i].symbol
+    : (num / formatKeys[i].value).toFixed(digitsAfterDecimal) +
+        formatKeys[i].symbol;
+};
+
+console.log(numberFormatter(1038294, 2), numberFormatter(74236, 0, true));
