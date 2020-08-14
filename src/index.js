@@ -1,3 +1,4 @@
+//@ts-nocheck
 //Algo tips
 import _ from "lodash";
 const data = [
@@ -244,3 +245,31 @@ const numberFormatter = (num, digitsAfterDecimal, isCurrency = false) => {
 };
 
 console.log(numberFormatter(1038294, 2), numberFormatter(74236, 0, true));
+
+const clone = (item) => JSON.parse(JSON.stringify(item));
+
+const deepEqual = (a, b) => {
+  if (typeof a == "object" && a != null && typeof b == "object" && b != null) {
+    var count = [0, 0];
+    for (let _ in a) count[0]++;
+    for (let _ in b) count[1]++;
+    if (count[0] - count[1] !== 0) {
+      return false;
+    }
+    for (let key in a) {
+      if (!(key in b) || !deepEqual(a[key], b[key])) {
+        return false;
+      }
+    }
+    for (let key in b) {
+      if (!(key in a) || !deepEqual(b[key], a[key])) {
+        return false;
+      }
+    }
+    return true;
+  } else {
+    return a === b;
+  }
+};
+
+console.log(deepEqual(obj1, obj2));
