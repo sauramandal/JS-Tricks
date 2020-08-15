@@ -304,4 +304,10 @@ const describeArc = (x, y, radius, startAngle, endAngle) => {
   ].join(" ");
 };
 
+const validateEmailFormat = (email) => {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+};
+
 console.log(describeArc(2, 4, 2, 1, 2));
+console.log(validateEmailFormat("saura.mandal1@gmail.com"));
