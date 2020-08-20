@@ -311,3 +311,49 @@ const validateEmailFormat = (email) => {
 
 console.log(describeArc(2, 4, 2, 1, 2));
 console.log(validateEmailFormat("saura.mandal1@gmail.com"));
+
+const rectOne = {
+  x: 2,
+  y: 3,
+  length: 20,
+  width: 10
+};
+const rectTwo = {
+  x: 3,
+  y: 1,
+  length: 20,
+  width: 10
+};
+
+const calculateResult = (rect1, rect2) => {
+  const bottomLeftXRect1 = rect1.x,
+    bottomLeftYRect1 = rect1.y - rect1.width;
+  const topRightXRect1 = rect1.y + rect1.length,
+    topRightYRect1 = rect1.y;
+  const bottomLeftXRect2 = rect2.x,
+    bottomLeftYRect2 = rect2.y - rect2.width;
+  const topRightXRect2 = rect2.y + rect2.length,
+    topRightYRect2 = rect2.y;
+  return getIntersectingArea(
+    bottomLeftXRect1,
+    bottomLeftYRect1,
+    topRightXRect1,
+    topRightYRect1,
+    bottomLeftXRect2,
+    bottomLeftYRect2,
+    topRightXRect2,
+    topRightYRect2
+  );
+};
+
+const getIntersectingArea = (a, b, c, d, p, q, r, s) => {
+  const left = Math.max(a, p),
+    right = Math.min(c, r),
+    bottom = Math.max(b, q),
+    top = Math.min(d, s);
+  return right - left > 0 && top - bottom > 0
+    ? (c - a) * (d - b) + (s - q) * (r - p) - (right - left) * (top - bottom)
+    : 0; //
+};
+
+console.log(calculateResult(rectOne, rectOne));
